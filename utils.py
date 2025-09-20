@@ -58,9 +58,37 @@ def copy_file(ex_path:str,new_path:str,name) :
     if not os.path.exists(my_file) :
         return "File does not exists"
     if os.path.exists(dest_file) :
-        return "Similar File exists"
+        return "Similar File exists in destination"
     shutil.copy2(my_file, dest_file)
     return "File is Copy"
+
+def copy_folder(ex_path:str,new_path:str,name) :
+    my_folder = os.path.join(ex_path,name)
+    if not os.path.exists(my_folder) :
+        return "Folder does not exists"
+    dest_folder = os.path.join(new_path,name)
+    if os.path.exists(dest_folder) :
+        return "Similar Folder exists in destination"
+    shutil.copytree(my_folder,dest_folder)
+    return "Folder copied"
+
+def rename(path:str,old_name,new_name) :
+    name = os.path.join(path,old_name)
+    next_name = os.path.join(path,new_name)
+    if not os.path.exists(name) :
+        return "item does not exists"
+    if os.path.isfile(name) :
+        if os.path.exists(next_name) :
+            return "Similar File exists in destination"
+        os.rename(name,next_name)
+        return "File renamed"
+    elif os.path.isdir(name) :
+        if os.path.exists(next_name) :
+            return "Similar Folder exists in destination"
+        os.rename(name,next_name)
+        return "Folder renamed"
+
+
 
 
 
